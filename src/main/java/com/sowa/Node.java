@@ -2,9 +2,9 @@ package com.sowa;
 
 public class Node<T> {
 
-    Node previous = null;
-    Node next = null;
-    T data;
+    private Node previous = null;
+    private Node next = null;
+    private T data;
 
     public T getData() {
         return data;

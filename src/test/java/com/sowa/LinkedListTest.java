@@ -31,11 +31,33 @@ class LinkedListTest {
     @Test
     void iterationTest() {
         LinkedList linkedList = createList(5);
+        int i = 0;
         while (linkedList.hasNext()) {
-
-            System.out.println(linkedList.iterate().getData());
+            assertEquals(i, linkedList.iterate().getData());
+            i++;
         }
+        LinkedList linkedListZero = new LinkedList();
+        assertEquals(null, linkedListZero.iterate());
     }
+
+    @Test
+    void headTest() {
+        LinkedList linkedList = createList(2);
+        assertEquals(0, linkedList.getHead().getData());
+        LinkedList linkedListZero = new LinkedList();
+        assertEquals(null, linkedListZero.getHead());
+    }
+
+    @Test
+    void tailTest() {
+        LinkedList linkedList = createList(7);
+        String result = " 1 2 3 4 5 6";
+        assertEquals(result, linkedList.getTail().toString());
+        LinkedList linkedListZero = new LinkedList();
+        assertEquals(null, linkedListZero.getTail());
+    }
+
+
 /*
     @Test
     void removeTest() {
@@ -45,6 +67,8 @@ class LinkedListTest {
         String result = " 1 2 3 4 6 7 8 9 10";
         assertEquals(result, linkedList.toString());
     }
+
+
 
     @Test
     void removeTest_LastItem()
@@ -77,10 +101,9 @@ class LinkedListTest {
 
     private LinkedList createList(int numOfElements) {
         LinkedList linkedList = new LinkedList();
-//        Float magicNumber = 3.14f;
-        int magicNumber = 1;
+
         for (int i = 0; i < numOfElements; ++i) {
-            linkedList.add(i * magicNumber);
+            linkedList.add(i);
         }
         return linkedList;
     }

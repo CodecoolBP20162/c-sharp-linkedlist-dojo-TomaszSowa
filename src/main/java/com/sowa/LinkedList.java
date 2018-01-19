@@ -11,18 +11,17 @@ public class LinkedList<T> {
 
     LinkedList() {}
 
-    public Node head() {
+    public Node getHead() {
         return head;
     }
 
-    public Node[] tail() {
-        Node[] tail = new Node[length];
-        Node item = head.getNext();
-        int index = 0;
-        while (item.getNext() != null) {
-            tail[index] = item;
-            item = item.getNext();
-            index++;
+    public LinkedList<T> getTail() {
+        LinkedList<T> tail = this;
+        if (tail.head != null) {
+            tail.head = head.getNext();
+            tail.length = tail.length - 1;
+        } else {
+            tail = null;
         }
         return tail;
     }
