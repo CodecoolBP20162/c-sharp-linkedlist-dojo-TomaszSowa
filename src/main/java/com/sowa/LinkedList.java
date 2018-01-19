@@ -1,65 +1,86 @@
 package com.sowa;
 
-public class LinkedList {
+public class LinkedList<T> {
 
-    private int size = 0;
-    private Node head;
+    private int length = 0;
+    private Node head = null;
+    private Node last = null;
+    private int index = 0;
+    private Node iterated;
+
 
     LinkedList() {}
 
-    LinkedList(int size) {
-        this.size = size;
-        array = new int[size];
+    public Node head() {
+        return head;
     }
 
-    public void add(int newItem) {
-
-        int[] newArray = new int[size + 1];
-        for (int i = 0; i < size; i++) {
-            newArray[i] = array[i];
+    public Node[] tail() {
+        Node[] tail = new Node[length];
+        Node item = head.getNext();
+        int index = 0;
+        while (item.getNext() != null) {
+            tail[index] = item;
+            item = item.getNext();
+            index++;
         }
-        newArray[size] = newItem;
-        size += 1;
-        array = newArray;
+        return tail;
+    }
+
+    public int length() {
+        return length;
+    }
+
+
+    public void add(T newItem) {
+        if (length == 0) {
+            head = new Node();
+            head.setData(newItem);
+            last = head;
+            iterated = head;
+        } else {
+            Node newLast = new Node();
+            newLast.setData(newItem);
+            last.setNext(newLast);
+            last = newLast;
+        }
+        length++;
+    }
+
+    public boolean hasNext() {
+
+        if(index < length) {
+            return true;
+        }
+        return false;
+    }
+
+    public Node iterate() {
+
+        Node result = iterated;
+        if (this.hasNext()) {
+            index++;
+            iterated = iterated.getNext();
+            return result;
+        }
+        return null;
     }
 
     public void remove(int index) {
 
-        int[] newArray = new int[size - 1];
-        for (int i = 0; i < index; i++) {
-            newArray[i] = array[i];
-        }
-        for (int i = index + 1; i < size; i++) {
-            newArray[i - 1] = array[i];
-        }
-        size -= 1;
-        array = newArray;
     }
 
     public void insert(int index, int newItem) {
-
-        if (index > size) {
-            add(newItem);
-        } else {
-            int[] newArray = new int[size + 1];
-            for (int i = 0; i < index; i++) {
-                newArray[i] = array[i];
-            }
-            newArray[index] = newItem;
-            for (int i = index; i < size; i++) {
-                newArray[i + 1] = array[i];
-            }
-            size += 1;
-            array = newArray;
-        }
     }
 
     @Override
     public String toString() {
 
         String result = "";
-        for (int i = 0; i < size; i++) {
-            result += " " + array[i];
+        Node node = head;
+        for (int i = 0; i < length; i++) {
+            result += " " + node.getData();
+            node = node.getNext();
         }
         return result;
     }
