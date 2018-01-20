@@ -28,17 +28,17 @@ class LinkedListTest {
         assertEquals(result, linkedList.toString());
     }
 
-//    @Test
-//    void iterationTest() {
-//        LinkedList linkedList = createList(5);
-//        int i = 0;
-//        while (linkedList.hasNext()) {
-//            assertEquals(i, linkedList.iterate().getData());
-//            i++;
-//        }
-//        LinkedList linkedListZero = new LinkedList();
-//        assertEquals(null, linkedListZero.iterate());
-//    }
+    @Test
+    void iterationTest() {
+        LinkedList linkedList = createList(5);
+        int i = 0;
+        while (linkedList.hasNext()) {
+            assertEquals(i, linkedList.iterate().getData());
+            i++;
+        }
+        LinkedList linkedListZero = new LinkedList();
+        assertEquals(null, linkedListZero.iterate());
+    }
 
     @Test
     void headTest() {
@@ -76,10 +76,9 @@ class LinkedListTest {
     void insertTest()
     {
         LinkedList linkedList = createList(11);
-        assertThrows(IndexOutOfBoundsException.class, () -> linkedList.insert(50, 20));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.insert(-1, 20));
-        linkedList.insert(10, 100);
-//        linkedList.insert(8, 80);
+        linkedList.insert(8, 80);
+        linkedList.insert(15, 100);
         linkedList.insert(0, -30);
 
         String result = " -30 0 1 2 3 4 5 6 7 80 8 9 10 100";

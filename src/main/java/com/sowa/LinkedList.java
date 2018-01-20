@@ -85,24 +85,27 @@ public class LinkedList<T> {
         length--;
     }
 
-    public void insert(int index, int newItem) {
-        Node beforeRemoved = null;
+    public void insert(int index, T newItem) {
+        Node beforeInserted = null;
         Node newNode = new Node(newItem);
-        if (index < 0 || index >= length) {
+        if (index < 0) {
             throw new IndexOutOfBoundsException();
         } else if (index == 0) {
             newNode.setNext(head);
             head.setPrevious(newNode);
             head = newNode;
-        } else if (index == length - 1) {
-            last.getPrevious().setNext(null);
+        } else if (index >= length) {
+            this.add(newItem);
+            length--;
         } else {
             for (int i = 0; i < index; i++) {
-                beforeRemoved = iterate();
+                beforeInserted = iterate();
             }
-            Node afterRemoved = iterate().getNext();
-            afterRemoved.setPrevious(beforeRemoved);
-            beforeRemoved.setNext(afterRemoved);
+            Node afterInserted = iterate();
+            afterInserted.setPrevious(newNode);
+            beforeInserted.setNext(newNode);
+            newNode.setNext(afterInserted);
+            newNode.setPrevious(beforeInserted);
         }
         length++;
     }
