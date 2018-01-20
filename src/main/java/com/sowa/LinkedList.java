@@ -40,6 +40,7 @@ public class LinkedList<T> {
         } else {
             Node newLast = new Node();
             newLast.setData(newItem);
+            newLast.setPrevious(last);
             last.setNext(newLast);
             last = newLast;
         }
@@ -66,10 +67,44 @@ public class LinkedList<T> {
     }
 
     public void remove(int index) {
-
+        Node beforeRemoved = null;
+        if (index < 0 || index >= length) {
+            throw new IndexOutOfBoundsException();
+        } else if (index == 0) {
+            head = head.getNext();
+        } else if (index == length - 1) {
+            last.getPrevious().setNext(null);
+        } else {
+            for (int i = 0; i < index; i++) {
+                beforeRemoved = iterate();
+            }
+            Node afterRemoved = iterate().getNext();
+            afterRemoved.setPrevious(beforeRemoved);
+            beforeRemoved.setNext(afterRemoved);
+        }
+        length--;
     }
 
     public void insert(int index, int newItem) {
+        Node beforeRemoved = null;
+        Node newNode = new Node(newItem);
+        if (index < 0 || index >= length) {
+            throw new IndexOutOfBoundsException();
+        } else if (index == 0) {
+            newNode.setNext(head);
+            head.setPrevious(newNode);
+            head = newNode;
+        } else if (index == length - 1) {
+            last.getPrevious().setNext(null);
+        } else {
+            for (int i = 0; i < index; i++) {
+                beforeRemoved = iterate();
+            }
+            Node afterRemoved = iterate().getNext();
+            afterRemoved.setPrevious(beforeRemoved);
+            beforeRemoved.setNext(afterRemoved);
+        }
+        length++;
     }
 
     @Override

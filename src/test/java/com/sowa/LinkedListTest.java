@@ -28,17 +28,17 @@ class LinkedListTest {
         assertEquals(result, linkedList.toString());
     }
 
-    @Test
-    void iterationTest() {
-        LinkedList linkedList = createList(5);
-        int i = 0;
-        while (linkedList.hasNext()) {
-            assertEquals(i, linkedList.iterate().getData());
-            i++;
-        }
-        LinkedList linkedListZero = new LinkedList();
-        assertEquals(null, linkedListZero.iterate());
-    }
+//    @Test
+//    void iterationTest() {
+//        LinkedList linkedList = createList(5);
+//        int i = 0;
+//        while (linkedList.hasNext()) {
+//            assertEquals(i, linkedList.iterate().getData());
+//            i++;
+//        }
+//        LinkedList linkedListZero = new LinkedList();
+//        assertEquals(null, linkedListZero.iterate());
+//    }
 
     @Test
     void headTest() {
@@ -58,46 +58,34 @@ class LinkedListTest {
     }
 
 
-/*
+
     @Test
     void removeTest() {
         LinkedList linkedList = createList(11);
+        assertThrows(IndexOutOfBoundsException.class, () -> linkedList.remove(50));
+        assertThrows(IndexOutOfBoundsException.class, () -> linkedList.remove(-1));
+        linkedList.remove(  0);
         linkedList.remove(5);
-        linkedList.remove(0);
-        String result = " 1 2 3 4 6 7 8 9 10";
+        linkedList.remove(  8);
+        String result = " 1 2 3 4 6 7 8 9";
         assertEquals(result, linkedList.toString());
     }
 
-
-
-    @Test
-    void removeTest_LastItem()
-    {
-        LinkedList linkedList = createList(10);
-        linkedList.remove(9);
-        String result = " 0 1 2 3 4 5 6 7 8";
-        assertEquals(result, linkedList.toString());
-    }
-
-    @Test
-    void removeTest_InvalidItem()
-    {
-        LinkedList linkedList = createList(10);
-//        assertThrows(linkedListIndexOutOfBoundsException.class, () -> linkedList.remove(10));
-//        assertThrows(linkedListIndexOutOfBoundsException.class, () -> linkedList.remove(-1));
-    }
 
     @Test
     void insertTest()
     {
         LinkedList linkedList = createList(11);
-        linkedList.insert(8, 223);
-        linkedList.insert(100, 654);
+        assertThrows(IndexOutOfBoundsException.class, () -> linkedList.insert(50, 20));
+        assertThrows(IndexOutOfBoundsException.class, () -> linkedList.insert(-1, 20));
+        linkedList.insert(10, 100);
+//        linkedList.insert(8, 80);
+        linkedList.insert(0, -30);
 
-        String result = " 0 1 2 3 4 5 6 7 223 8 9 10 654";
+        String result = " -30 0 1 2 3 4 5 6 7 80 8 9 10 100";
         assertEquals(result, linkedList.toString());
     }
-*/
+
 
     private LinkedList createList(int numOfElements) {
         LinkedList linkedList = new LinkedList();
